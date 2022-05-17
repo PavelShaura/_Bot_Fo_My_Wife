@@ -2,7 +2,7 @@ import asyncio
 import python_weather
 import telebot
 
-bot = telebot.TeleBot("5269200934:AAFTpKdXVFmqlL12IsfK2ZAVuHi65KCxp-k")
+bot = telebot.TeleBot("5175376892:AAEbTFlp5RzEasOUOjUbq9UNP2KM7axAm2s")
 
 
 @bot.message_handler(content_types=['text'])
