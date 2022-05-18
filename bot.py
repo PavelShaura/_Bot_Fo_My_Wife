@@ -1,8 +1,9 @@
 import asyncio
+
 import python_weather
 import telebot
 
-bot = telebot.TeleBot("5175376892:AAEbTFlp5RzEasOUOjUbq9UNP2KM7axAm2s")
+bot = telebot.TeleBot("5269200934:AAFTpKdXVFmqlL12IsfK2ZAVuHi65KCxp-k")
 
 
 @bot.message_handler(content_types=['text'])
@@ -16,9 +17,8 @@ def echo_all(message):
 
         weather = await client.find("Tuapse")
 
-        answer = f'Температура воздуха в \nпгт. НОВОМИХАЙЛОВСКОМ на данный момент...\n   ⬇⬇⬇\n\n'
-        answer += f'➡   {weather.current.temperature}°C   ⬅\n\n'
-        answer += f'  ⬆⬆⬆  \n'
+        answer = f'Температура воздуха в \nпгт. НОВОМИХАЙЛОВСКОМ на данный момент...\n   \n'
+        answer += f'   {weather.current.temperature}°C         ⬅\n\n'
 
         if int(weather.current.temperature) <= 15:
             answer += f'Еще не лето, в шортах будет холодно...😩\n\n'
@@ -30,27 +30,36 @@ def echo_all(message):
         answer += f'💚 ПОГОДА НА БЛИЖАЙШИЕ 5 ДНЕЙ: \n\n'
 
         for forecast in weather.forecasts:
-            answer += f'{forecast.date}'
-            answer += f'  ➡  {forecast.temperature} °C   ⬅\n'
+            answer += f'{forecast.temperature} °C   '
             mood = forecast.sky_text
             for i in mood:
                 if mood == "Clear":
-                    answer += f'🌞Солнечно 🌞\n\n'
+                    answer += f'Солнечно    🌞\n\n'
                     break
                 elif mood == "Cloudy":
-                    answer += f'🌤Небольшая облачнасть 🌤\n\n'
+                    answer += f'    🌤\n\n'
                     break
                 elif mood == "Partly Sunny":
-                    answer += f'🌥Переменная облачнасть🌥\n\n'
+                    answer += f'    🌥\n\n'
                     break
                 elif mood == "Mostly Cloudy":
-                    answer += f'☁Затянуто☁\n\n'
+                    answer += f'     ☁\n\n'
                     break
                 elif mood == "Mostly Sunny":
-                    answer += f'🌥Временами солнечно🌥\n\n'
+                    answer += f'     🌥\n\n'
                     break
-                else:
-                    answer += f'⛈Дождь⛈\n\n'
+                elif mood == "Light Rain":
+                    answer += f'     ⛈\n\n'
+                    break
+                elif mood == "Rain":
+                    answer += f'    ⛈\n\n'
+                    break
+                elif mood == "Havy Rain":
+                    answer += f'     ⛈\n\n'
+                    break
+                elif mood == "Partly Cloudy":
+                    answer += f'     🌤\n\n'
+                    break
 
         await client.close()
 
